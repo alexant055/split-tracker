@@ -1,0 +1,16 @@
+.Header {
+    height: 56px;
+    width: 100%;
+    background-color: #E5E5E5;
+    display: flex;
+}
+
+.Name {
+    font-size: 24px;
+    margin:auto 0;
+    font-weight: bold;
+}
+
+.Logo {
+    max-width: 56px;
+}

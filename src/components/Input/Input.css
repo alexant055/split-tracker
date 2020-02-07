@@ -1,0 +1,28 @@
+.InputComponent{
+    width: 300px;
+    max-width: 300px;
+    display: flex;
+    margin: auto;
+    padding: 10px;
+}
+
+.Label {
+    font-size: 16px;
+    padding: 3px 10px;
+    font-weight: bold;
+    width: 100px;
+    max-width: 100px;
+    height: 18px;
+    margin: auto;
+    color: #444444;
+}
+
+.Input {
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid black;
+    width: 180px;
+    max-width: 180px;
+    height: 18px;
+    color: #222222;
+}
