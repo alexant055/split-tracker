@@ -3,7 +3,11 @@ import React, {Component} from "react";
 import "./ExpenseForm.css";
 
 /* Component */
-import Input from "../../components/Input/Input";
+import InputComponent from "../../components/Input/Input";
+
+import axios from "axios";
+
+import {members} from "../../globals/Global";
 
 class ExpenseForm extends Component{
 
@@ -79,14 +83,13 @@ class ExpenseForm extends Component{
     };
 
     inputChangeHandler = (event, id) => {
-        console.log(id, event.target.value)
 
         const  updatedForm = { ...this.state.form};
         const updatedElement = { ...updatedForm[id]};
 
         updatedElement.value = event.target.value;
         updatedElement.touched = true;
-        updatedElement.valid = this.formElementValidation(event.target.value, updatedElement.elementConfig.type);
+        updatedElement.valid = this.formElementValidation(id, event.target.value, updatedElement.elementConfig.type);
 
         updatedForm[id] = updatedElement;
 
@@ -101,14 +104,28 @@ class ExpenseForm extends Component{
         });
     };
 
-    formElementValidation = (value, type) =>
-    {
-        console.log(value, type)
+    formElementValidation = (id, value, type) => {
+        if(id === 'WhoPaid' || id === 'ToWhom')
+            return members.filter(mem => mem.toLocaleLowerCase() === value.toString().toLocaleLowerCase()).length > 0;
+
         if(type === "number")
             return value > 0;
         else
             return value !== '';
-    }
+    };
+
+    addExpense = (event) => {
+        event.preventDefault();
+
+        let expenseData = {};
+        for(let key in this.state.form) {
+            expenseData[key] = this.state.form[key].value
+        }
+
+        axios.post("https://split-tracker-5c9f0.firebaseio.com/expense.json", expenseData)
+            .then(resp => console.log(resp))
+            .catch(error => console.log(error));
+    };
 
     render() {
 
@@ -122,7 +139,7 @@ class ExpenseForm extends Component{
 
         let form =  <form>
             {formElement.map(element => (
-                <Input
+                <InputComponent
                     key = {element.id}
                     type={element.config.elementConfig.type}
                     name={element.config.elementConfig.name}
@@ -130,8 +147,13 @@ class ExpenseForm extends Component{
                     value={element.config.value}
                     onInputChange={(event) => this.inputChangeHandler(event, element.id)}
                 />))}
-            <button className="FormButton" disabled={!this.state.formIsValid}>ADD</button>
+            <button
+                className="FormButton"
+                disabled={!this.state.formIsValid}
+                onClick={this.addExpense}
+            >ADD</button>
         </form>;
+
 
         return(
             <div className="Form">

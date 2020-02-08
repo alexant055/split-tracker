@@ -4,6 +4,7 @@
     display: flex;
     margin: auto;
     padding: 10px;
+    height: 40px;
 }
 
 .Label {
@@ -17,12 +18,12 @@
     color: #444444;
 }
 
-.Input {
+.InputField {
     font-size: 14px;
-    padding: 5px;
+    padding: 5px 10px;
     border: 1px solid black;
     width: 180px;
     max-width: 180px;
-    height: 18px;
     color: #222222;
+    height: 30px;
 }

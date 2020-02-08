@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+import 'antd/dist/antd.css';
 
 /* Containers */
 import ExpenseForm from "../ExpenseForm/ExpenseForm";
@@ -7,6 +8,7 @@ import ExpenseForm from "../ExpenseForm/ExpenseForm";
 /* Components */
 import Header from "../../components/Header/Header";
 import MemberList from "../MemberList/MemberList";
+import ViewList from "../ViewList/ViewList";
 
 class App extends Component {
     state ={
@@ -20,6 +22,7 @@ class App extends Component {
             <div className="AppBody">
                 <MemberList/>
                 <ExpenseForm/>
+                <ViewList/>
             </div>
         </div>
     );

@@ -2,25 +2,23 @@ import React, {Component} from "react";
 
 import "./MemeberList.css";
 import Member from "../../components/Member/Member";
+import {members} from "../../globals/Global";
 
 class MemberList extends Component{
 
     state ={
         members:{
-            name: ['Alexander', 'Christina', 'Ankur', 'Shivanya', 'Bharath', 'Tony', 'Janani', 'Jona', 'Praveen']
+            name: members
         }
     };
 
     render() {
-        return (
-            <div className="MemberList">
-                {this.state.members.name.map(name =>(
-                    <Member name={name} key={name}/>
-                    )
-                 )
-                }
+        return <div className="MemberList">
+            <div className="Title">
+                <strong>Members</strong>
             </div>
-        );
+            {this.state.members.name.map(name => <Member name={name} key={name}/>)}
+        </div>;
     }
 }
 

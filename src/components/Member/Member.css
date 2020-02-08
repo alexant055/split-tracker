@@ -1,10 +1,18 @@
 .Member {
     padding: 5px;
-    height: 30px;
+    height: 20px;
     margin: 0 auto;
+    cursor: pointer;
+    width: 150px;
+}
+
+.Member .Name:hover {
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .Member .Name {
     font-size: 16px;
+    font-weight: normal;
     color: #444444;
 }
