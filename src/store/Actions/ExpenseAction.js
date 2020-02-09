@@ -56,3 +56,31 @@ export const fetchExpense = () => {
             .catch(error => dispatch(fetchExpenseFail(error)));
     });
 };
+
+const deleteExpenseSuccess = (key) => {
+    return {
+        type: types.DELETE_EXPENSE,
+        key: key
+    }
+};
+
+const deleteExpenseFail = () => {
+    return {
+        type: types.DELETE_EXPENSE_FAIL
+    }
+};
+
+export const deleteExpense = (key) => {
+    const expenseObj = "/expense/" + key + ".json";
+    return (dispatch => {
+        axios.delete(API_URL + expenseObj)
+            .then(r => {
+                if(r.status === 200)
+                    dispatch(deleteExpenseSuccess(key));
+                else
+                    dispatch(deleteExpenseFail())
+            })
+            .catch(error => dispatch(deleteExpenseFail()))
+        }
+    );
+};

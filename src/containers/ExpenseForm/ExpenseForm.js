@@ -8,6 +8,7 @@ import InputComponent from "../../components/Input/Input";
 import {members} from "../../globals/Global";
 import {connect} from "react-redux";
 import * as expenses from "../../store/Actions/ExpenseAction";
+import MemberList from "../MemberList/MemberList";
 
 class ExpenseForm extends Component{
 
@@ -135,6 +136,7 @@ class ExpenseForm extends Component{
         }
 
         let form =  <form>
+            <div className="Title">Add Expense</div>
             {formElement.map(element => (
                 <InputComponent
                     key = {element.id}
@@ -154,6 +156,7 @@ class ExpenseForm extends Component{
 
         return(
             <div className="Form">
+                <MemberList/>
                 {form}
             </div>
         );

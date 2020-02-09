@@ -7,7 +7,6 @@ import ExpenseForm from "../ExpenseForm/ExpenseForm";
 
 /* Components */
 import Header from "../../components/Header/Header";
-import MemberList from "../MemberList/MemberList";
 import ViewList from "../ViewList/ViewList";
 
 class App extends Component {
@@ -20,7 +19,6 @@ class App extends Component {
         <div className="App">
             <Header name={this.state.name}/>
             <div className="AppBody">
-                <MemberList/>
                 <ExpenseForm/>
                 <ViewList/>
             </div>

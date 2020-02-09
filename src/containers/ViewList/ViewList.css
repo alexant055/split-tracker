@@ -1,3 +1,13 @@
 .ViewList {
    margin: 20px;
 }
+
+.Icon {
+   cursor: pointer;
+   fontSize: 16px;
+   padding: 0px 5px
+}
+
+.Icon:hover {
+   fontSize: 20px;
+}

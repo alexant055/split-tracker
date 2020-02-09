@@ -4,6 +4,7 @@ import TableView from "../../components/Table/Table";
 import "./ViewList.css";
 import {connect} from "react-redux";
 import * as actions from "../../store/Actions/ExpenseAction";
+import {Icon} from "antd";
 
 const columns = [
     {
@@ -30,15 +31,6 @@ const columns = [
         title: 'Description',
         key: 'Desc',
         dataIndex: 'Desc'
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-            <span>
-                <button>Delete</button>
-             </span>
-        ),
     }
 ];
 
@@ -48,8 +40,35 @@ class ViewList extends Component{
         data: []
     };
 
+    clicked = (key, event) => {
+        if(event.currentTarget.id === "Del-Exp")
+            this.props.onDeleteExpense(key);
+    };
+
     componentDidMount(): void {
         this.props.onComponentLoad();
+
+        let action = {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => (
+                <div>
+                    <Icon
+                        id="Edit-Exp"
+                        onClick={(event: HTMLElement) => this.clicked(record.key, event)}
+                        type="edit"
+                        theme="filled"
+                        style={{ color: "#3F8ED3" }} className="Icon"/>
+                    <Icon
+                        id="Del-Exp"
+                        onClick={(event:HTMLElement) => this.clicked(record.key, event)}
+                        type="delete" theme="filled"
+                        style={{ color: '#ED1C24' }} className="Icon"/>
+                </div>
+            )
+        }
+
+        this.state.columns.push(action);
     }
 
     render() {
@@ -72,7 +91,8 @@ const mapPropsToState = state => {
 
 const mapPropsToDispatch = dispatch => {
   return {
-      onComponentLoad: () => dispatch(actions.fetchExpense())
+      onComponentLoad: () => dispatch(actions.fetchExpense()),
+      onDeleteExpense: (key) => dispatch(actions.deleteExpense(key))
   }
 };
 

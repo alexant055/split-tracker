@@ -6,6 +6,7 @@ const TableView = (props) => {
     return (
       <div>
         <Table
+            bordered
             size={props.size}
             columns={props.column}
             dataSource={props.data}
