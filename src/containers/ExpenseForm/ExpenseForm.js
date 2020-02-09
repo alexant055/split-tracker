@@ -5,9 +5,9 @@ import "./ExpenseForm.css";
 /* Component */
 import InputComponent from "../../components/Input/Input";
 
-import axios from "axios";
-
 import {members} from "../../globals/Global";
+import {connect} from "react-redux";
+import * as expenses from "../../store/Actions/ExpenseAction";
 
 class ExpenseForm extends Component{
 
@@ -121,10 +121,7 @@ class ExpenseForm extends Component{
         for(let key in this.state.form) {
             expenseData[key] = this.state.form[key].value
         }
-
-        axios.post("https://split-tracker-5c9f0.firebaseio.com/expense.json", expenseData)
-            .then(resp => console.log(resp))
-            .catch(error => console.log(error));
+        this.props.addExpenseAction(expenseData);
     };
 
     render() {
@@ -163,4 +160,10 @@ class ExpenseForm extends Component{
     }
 };
 
-export default ExpenseForm;
+const mapPropsToDispatch = dispatch => {
+    return {
+        addExpenseAction: (expense) => dispatch(expenses.addExpense(expense))
+    }
+};
+
+export default connect(null, mapPropsToDispatch)(ExpenseForm);

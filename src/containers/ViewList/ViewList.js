@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import TableView from "../../components/Table/Table";
 
 import "./ViewList.css";
-import axios from "axios";
+import {connect} from "react-redux";
+import * as actions from "../../store/Actions/ExpenseAction";
 
 const columns = [
     {
@@ -48,38 +49,31 @@ class ViewList extends Component{
     };
 
     componentDidMount(): void {
-        const dataSource = [];
-        axios.get("https://split-tracker-5c9f0.firebaseio.com/expense.json")
-            .then(resp => {
-                for(let key in resp.data) {
-                    const data = {};
-                    const row = resp.data[key];
-                    data.key = key;
-                    for(let index in row){
-                        data[index] = row[index];
-                    }
-                    dataSource.push(data);
-                }
-                this.setState({data: dataSource});
-            })
-            .catch(error => console.log(error));
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState){
-        console.log(nextProps)
-        console.log(prevState)
+        this.props.onComponentLoad();
     }
 
     render() {
         return(
             <div className="ViewList">
                 <TableView
-                    size={"10"}
+                    size={"small"}
                     column={this.state.columns}
-                    data={this.state.data}/>
+                    data={this.props.data}/>
             </div>
         );
     }
 }
 
-export default ViewList;
+const mapPropsToState = state => {
+    return {
+        data: state.expense.expenseData
+    }
+};
+
+const mapPropsToDispatch = dispatch => {
+  return {
+      onComponentLoad: () => dispatch(actions.fetchExpense())
+  }
+};
+
+export default connect(mapPropsToState, mapPropsToDispatch) (ViewList);

@@ -1,0 +1,4 @@
+export const ADD_EXPENSE = "ADD_EXPENSE";
+export const ADD_EXPENSE_FAIL = "ADD_EXPENSE_FAIL";
+export const GET_EXPENSES = "GET_EXPENSES";
+export const GET_EXPENSES_FAIL = "GET_EXPENSES_FAIL";
