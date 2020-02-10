@@ -4,6 +4,7 @@ import expense from "./ExpenseReducer";
 
 const rootReducer = combineReducers({
     expense,
+
     routing: routerReducer
 });
 

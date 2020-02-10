@@ -13,3 +13,20 @@
     text-align: center;
     box-shadow: inset 0 0 10px;
 }
+
+.MemberList .Action button{
+    background-color: lightblue;
+    color: black;
+    font-size: 12px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: inset 0 0 10px;
+    padding: 0px 20px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.MemberList .Action {
+    display: flex;
+    flex-direction: row;
+}

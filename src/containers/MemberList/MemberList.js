@@ -17,6 +17,11 @@ class MemberList extends Component{
             <div className="Title">
                 <strong>Members</strong>
             </div>
+            <div className="Action">
+                <button onClick={this.props.onRemoveMember}>-</button>
+                <button onClick={this.props.onAddMember}>+</button>
+            </div>
+
             {this.state.members.name.map(name => <Member name={name} key={name}/>)}
         </div>;
     }
