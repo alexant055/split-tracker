@@ -5,7 +5,6 @@ import "./ExpenseForm.css";
 /* Component */
 import InputComponent from "../../components/Input/Input";
 
-import {members} from "../../globals/Global";
 import {connect} from "react-redux";
 import * as expenses from "../../store/Actions/ExpenseAction";
 import MemberList from "../MemberList/MemberList";
@@ -106,9 +105,10 @@ class ExpenseForm extends Component{
     };
 
     formElementValidation = (id, value, type) => {
-        if(id === 'WhoPaid' || id === 'ToWhom')
-            return members.filter(mem => mem.toLocaleLowerCase() === value.toString().toLocaleLowerCase()).length > 0;
-
+            if(id === 'WhoPaid' || id === 'ToWhom')
+                return this.props.members
+                    .filter(mem => mem.name.toLocaleLowerCase() === value.toString().toLocaleLowerCase())
+                    .length > 0;
         if(type === "number")
             return value > 0;
         else
@@ -163,10 +163,16 @@ class ExpenseForm extends Component{
     }
 };
 
+const mapPropsToState = state => {
+    return {
+        members: state.member.members
+    }
+};
+
 const mapPropsToDispatch = dispatch => {
     return {
         addExpenseAction: (expense) => dispatch(expenses.addExpense(expense))
     }
 };
 
-export default connect(null, mapPropsToDispatch)(ExpenseForm);
+export default connect(mapPropsToState, mapPropsToDispatch)(ExpenseForm);

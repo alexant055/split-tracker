@@ -6,3 +6,11 @@ export const DELETE_EXPENSE = "DELETE_EXPENSE";
 export const DELETE_EXPENSE_FAIL = "DELETE_EXPENSE_FAIL";
 export const EDIT_EXPENSE = "EDIT_EXPENSE";
 export const EDIT_EXPENSE_FAIL = "EDIT_EXPENSE_FAIL";
+
+/* Member List */
+export const GET_MEMBER = "GET_MEMBER";
+export const ADD_MEMBER = "ADD_MEMBER";
+export const REMOVE_MEMBER = "REMOVE_MEMBER";
+export const GET_MEMBER_FAIL = "GET_MEMBER_FAIL";
+export const ADD_MEMBER_FAIL = "ADD_MEMBER_FAIL";
+export const REMOVE_MEMBER_FAIL = "REMOVE_MEMBER_FAIL";

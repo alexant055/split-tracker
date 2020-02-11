@@ -1,18 +1,27 @@
 .Member {
-    padding: 5px;
-    height: 20px;
     margin: 0 auto;
-    cursor: pointer;
     width: 150px;
+    display: flex;
+    cursor: pointer;
 }
 
-.Member .Name:hover {
-    font-size: 14px;
-    font-weight: bold;
+.Member:hover, .Member .Name:hover {
+    background-color: white;
 }
 
 .Member .Name {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
     color: #444444;
+    width: 140px;
+}
+
+.Member .Icon {
+    cursor: pointer;
+    text-align: right;
+    padding-top: 5px;
+}
+
+.Member .Icon:active {
+    font-size: 18px;
 }
