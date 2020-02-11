@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 
 import "./ExpenseForm.css";
-
 /* Component */
 import InputComponent from "../../components/Input/Input";
 
@@ -9,7 +8,7 @@ import {connect} from "react-redux";
 import * as expenses from "../../store/Actions/ExpenseAction";
 import MemberList from "../MemberList/MemberList";
 
-class ExpenseForm extends Component{
+class ExpenseForm extends Component {
 
     state = {
         form: {
@@ -84,8 +83,8 @@ class ExpenseForm extends Component{
 
     inputChangeHandler = (event, id) => {
 
-        const  updatedForm = { ...this.state.form};
-        const updatedElement = { ...updatedForm[id]};
+        const updatedForm = {...this.state.form};
+        const updatedElement = {...updatedForm[id]};
 
         updatedElement.value = event.target.value;
         updatedElement.touched = true;
@@ -94,7 +93,7 @@ class ExpenseForm extends Component{
         updatedForm[id] = updatedElement;
 
         let isFormValid = true;
-        for(let identifier in updatedForm) {
+        for (let identifier in updatedForm) {
             isFormValid = updatedForm[identifier].valid && isFormValid;
         }
 
@@ -105,11 +104,11 @@ class ExpenseForm extends Component{
     };
 
     formElementValidation = (id, value, type) => {
-            if(id === 'WhoPaid' || id === 'ToWhom')
-                return this.props.members
-                    .filter(mem => mem.name.toLocaleLowerCase() === value.toString().toLocaleLowerCase())
-                    .length > 0;
-        if(type === "number")
+        if (id === 'WhoPaid' || id === 'ToWhom')
+            return this.props.members
+                .filter(mem => mem.name.toLocaleLowerCase() === value.toString().toLocaleLowerCase())
+                .length > 0;
+        if (type === "number")
             return value > 0;
         else
             return value !== '';
@@ -119,7 +118,7 @@ class ExpenseForm extends Component{
         event.preventDefault();
 
         let expenseData = {};
-        for(let key in this.state.form) {
+        for (let key in this.state.form) {
             expenseData[key] = this.state.form[key].value
         }
         this.props.addExpenseAction(expenseData);
@@ -128,18 +127,20 @@ class ExpenseForm extends Component{
     render() {
 
         let formElement = [];
-        for(let key in this.state.form) {
+        for (let key in this.state.form) {
+            let config = {};
+            config = this.state.form[key];
             formElement.push({
-               id: key,
-               config: this.state.form[key]
+                id: key,
+                config: config
             });
         }
 
-        let form =  <form>
+        let form = <form id="expense-form">
             <div className="Title">Add Expense</div>
             {formElement.map(element => (
                 <InputComponent
-                    key = {element.id}
+                    key={element.id}
                     type={element.config.elementConfig.type}
                     name={element.config.elementConfig.name}
                     touched={element.config.touched}
@@ -150,22 +151,24 @@ class ExpenseForm extends Component{
                 className="FormButton"
                 disabled={!this.state.formIsValid}
                 onClick={this.addExpense}
-            >ADD</button>
+            >ADD
+            </button>
         </form>;
 
 
-        return(
+        return (
             <div className="Form">
                 <MemberList/>
                 {form}
             </div>
         );
     }
-};
+}
 
 const mapPropsToState = state => {
     return {
-        members: state.member.members
+        members: state.member.members,
+        addedExpense: state.expense.added
     }
 };
 

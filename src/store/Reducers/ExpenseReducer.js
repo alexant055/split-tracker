@@ -20,7 +20,7 @@ const addExpense = (state, action) => {
 };
 
 const getExpense = (state, action) => {
-    return updateObject(state, {expenseData: action.data, added: true});
+    return updateObject(state, {expenseData: action.data});
 };
 
 const addExpenseFail = (state) => {
